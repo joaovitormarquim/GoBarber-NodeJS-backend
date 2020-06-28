@@ -1,5 +1,4 @@
 import { uuid } from 'uuidv4';
-import AppointmentsRepository from '../repositories/AppointmentsRepository';
 
 class Appointment {
   id: string;
