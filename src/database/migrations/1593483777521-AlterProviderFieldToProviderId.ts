@@ -3,9 +3,7 @@ import {
   QueryRunner,
   TableColumn,
   TableForeignKey,
-  Table,
 } from 'typeorm';
-import { query } from 'express';
 
 export default class AlterProviderFieldToProviderId1593483777521
   implements MigrationInterface {
