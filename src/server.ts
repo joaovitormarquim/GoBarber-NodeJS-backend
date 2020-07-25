@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 
 import express, { Request, Response, NextFunction } from 'express';
+import cors from 'cors';
 import 'express-async-errors';
 
 import routes from './routes/index';
@@ -10,6 +11,8 @@ import AppError from './errors/AppError';
 import './database';
 
 const app = express();
+
+app.use(cors());
 
 app.use(express.json());
 
