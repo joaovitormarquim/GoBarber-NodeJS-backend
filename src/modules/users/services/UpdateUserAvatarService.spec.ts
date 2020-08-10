@@ -25,7 +25,7 @@ describe('UpdateUserAvatar', () => {
       avatarFilename: 'foto-de-joãozim',
     });
 
-    expect(updatedUser.avatar).toEqual('foto-de-joãozim');
+    await expect(updatedUser.avatar).toEqual('foto-de-joãozim');
   });
 
   it('shold not be able to change avatar if user do not exists', async () => {
@@ -37,7 +37,7 @@ describe('UpdateUserAvatar', () => {
       fakeStorageProvider,
     );
 
-    expect(
+    await expect(
       updateUserAvatar.execute({
         user_id: 'non-existing user',
         avatarFilename: 'foto-de-joãozim',
@@ -72,7 +72,7 @@ describe('UpdateUserAvatar', () => {
       avatarFilename: 'nova-foto-de-joãozim',
     });
 
-    expect(deleteFile).toHaveBeenCalledWith('foto-de-joãozim');
-    expect(updatedUser.avatar).toEqual('nova-foto-de-joãozim');
+    await expect(deleteFile).toHaveBeenCalledWith('foto-de-joãozim');
+    await expect(updatedUser.avatar).toEqual('nova-foto-de-joãozim');
   });
 });

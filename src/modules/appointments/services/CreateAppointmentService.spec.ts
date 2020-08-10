@@ -20,9 +20,9 @@ describe('CreateAppointment', () => {
       provider_id,
     });
 
-    expect(appointment).toHaveProperty('id');
-    expect(appointment.provider_id).toBe(provider_id);
-    expect(isEqual(appointment.date, startOfHour(date))).toBe(true);
+    await expect(appointment).toHaveProperty('id');
+    await expect(appointment.provider_id).toBe(provider_id);
+    await expect(isEqual(appointment.date, startOfHour(date))).toBe(true);
   });
 
   it('should not be to create two appointments on the same schedule', async () => {
@@ -38,7 +38,7 @@ describe('CreateAppointment', () => {
       provider_id: uuid(),
     });
 
-    expect(
+    await expect(
       createAppointment.execute({
         date,
         provider_id: uuid(),

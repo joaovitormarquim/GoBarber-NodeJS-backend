@@ -32,8 +32,8 @@ describe('AuthenticateUser', () => {
       password: '123456',
     });
 
-    expect(response).toHaveProperty('token');
-    expect(response.user).toEqual(user);
+    await expect(response).toHaveProperty('token');
+    await expect(response.user).toEqual(user);
   });
 
   it('should not be able to login with non existing email', async () => {
@@ -55,7 +55,7 @@ describe('AuthenticateUser', () => {
       password: '123456',
     });
 
-    expect(
+    await expect(
       authenticateUser.execute({
         email: 'wrong-email',
         password: '123456',
@@ -82,7 +82,7 @@ describe('AuthenticateUser', () => {
       password: '123456',
     });
 
-    expect(
+    await expect(
       authenticateUser.execute({
         email: 'joaozim@email.com',
         password: 'wrong-password',
