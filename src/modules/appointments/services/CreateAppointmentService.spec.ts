@@ -5,13 +5,18 @@ import { uuid } from 'uuidv4';
 import { startOfHour, isEqual } from 'date-fns';
 import CreateAppointmentService from './CreateAppointmentService';
 
+let fakeAppointmentsRepository: FakeAppointmentsRepository;
+let createAppointment: CreateAppointmentService;
+
 describe('CreateAppointment', () => {
-  it('should be able to create a new appointment', async () => {
-    const fakeAppointmentsRepository = new FakeAppointmentsRepository();
-    const createAppointment = new CreateAppointmentService(
+  beforeEach(() => {
+    fakeAppointmentsRepository = new FakeAppointmentsRepository();
+    createAppointment = new CreateAppointmentService(
       fakeAppointmentsRepository,
     );
+  });
 
+  it('should be able to create a new appointment', async () => {
     const date = new Date();
     const provider_id = uuid();
 
@@ -26,11 +31,6 @@ describe('CreateAppointment', () => {
   });
 
   it('should not be to create two appointments on the same schedule', async () => {
-    const fakeAppointmentsRepository = new FakeAppointmentsRepository();
-    const createAppointment = new CreateAppointmentService(
-      fakeAppointmentsRepository,
-    );
-
     const date = new Date(2020, 4, 10, 11);
 
     await createAppointment.execute({
