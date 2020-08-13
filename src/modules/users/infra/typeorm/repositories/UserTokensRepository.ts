@@ -12,11 +12,11 @@ class UserTokensRepository implements IUserTokensRepository {
   }
 
   public async generate(user_id: string): Promise<UserToken> {
-    const userToken = this.ormRepository.create({
+    const userToken = await this.ormRepository.create({
       user_id,
     });
 
-    this.ormRepository.save(userToken);
+    await this.ormRepository.save(userToken);
 
     return userToken;
   }
