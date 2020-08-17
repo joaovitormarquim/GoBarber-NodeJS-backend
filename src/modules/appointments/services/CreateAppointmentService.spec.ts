@@ -1,17 +1,23 @@
 import AppError from '@shared/errors/AppError';
 
-import FakeAppointmentsRepository from '@modules/appointments/repositories/fakes/FakeAppointmentsRepository';
 import { startOfHour, isEqual } from 'date-fns';
+
+import FakeAppointmentsRepository from '@modules/appointments/repositories/fakes/FakeAppointmentsRepository';
+import FakeNotificationsRepository from '@modules/notifications/repositories/fakes/FakeNotificationsRepository';
 import CreateAppointmentService from './CreateAppointmentService';
 
 let fakeAppointmentsRepository: FakeAppointmentsRepository;
 let createAppointment: CreateAppointmentService;
+let fakeNotificationsRepository: FakeNotificationsRepository;
 
 describe('CreateAppointment', () => {
   beforeEach(() => {
     fakeAppointmentsRepository = new FakeAppointmentsRepository();
+    fakeNotificationsRepository = new FakeNotificationsRepository();
+
     createAppointment = new CreateAppointmentService(
       fakeAppointmentsRepository,
+      fakeNotificationsRepository,
     );
   });
 
@@ -35,7 +41,7 @@ describe('CreateAppointment', () => {
   });
 
   it('should not be to create two appointments on the same schedule', async () => {
-    const appointmentDate = new Date(2020, 4, 10, 11);
+    const appointmentDate = new Date(2020, 4, 10, 10);
 
     jest.spyOn(Date, 'now').mockImplementationOnce(() => {
       return new Date(2020, 4, 10, 10).getTime();
